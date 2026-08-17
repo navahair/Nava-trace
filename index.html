@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>NAVA HAIR &mdash; Batch Traceability</title>
+<meta name="description" content="Scan-to-verify production records for every Nava Hair lot.">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#0d0d0f; --ink2:#16161a; --line:#2a2a31;
+  --cream:#f4efe7; --mute:#9a958c; --gold:#c9a227; --gold-soft:#e3c766;
+  --ok:#4ea87a;
+}
+html{-webkit-text-size-adjust:100%}
+body{
+  background:var(--ink); color:var(--cream);
+  font-family:ui-sans-serif,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  line-height:1.6; font-size:16px;
+}
+.wrap{max-width:720px;margin:0 auto;padding:0 20px}
+a{color:var(--gold-soft)}
+
+/* header */
+header{border-bottom:1px solid var(--line);padding:22px 0;position:sticky;top:0;
+  background:rgba(13,13,15,.92);backdrop-filter:blur(10px);z-index:10}
+.brandrow{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{font-weight:700;letter-spacing:.22em;font-size:15px}
+.brand small{display:block;letter-spacing:.12em;font-size:10px;color:var(--mute);
+  font-weight:500;margin-top:3px}
+.verified{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--ok);
+  color:var(--ok);border-radius:999px;padding:5px 11px;font-size:11px;
+  letter-spacing:.08em;font-weight:600;white-space:nowrap}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--ok)}
+
+/* hero */
+.hero{padding:40px 0 30px;border-bottom:1px solid var(--line)}
+.kicker{color:var(--gold);font-size:11px;letter-spacing:.24em;font-weight:700;
+  text-transform:uppercase;margin-bottom:14px}
+h1{font-size:31px;line-height:1.2;font-weight:700;letter-spacing:-.01em}
+.batchid{margin-top:14px;display:inline-block;font-family:ui-monospace,Menlo,Consolas,monospace;
+  font-size:14px;letter-spacing:.1em;color:var(--gold-soft);
+  border:1px dashed #4a4230;border-radius:8px;padding:7px 13px;background:#17150f}
+.lede{margin-top:18px;color:#c8c2b8;font-size:15px}
+
+/* spec grid */
+.specs{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);
+  border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-top:26px}
+.spec{background:var(--ink2);padding:15px 16px}
+.spec dt{font-size:10px;letter-spacing:.14em;color:var(--mute);text-transform:uppercase;
+  font-weight:600}
+.spec dd{margin-top:5px;font-size:15px;font-weight:600}
+
+/* sections */
+section{padding:40px 0;border-bottom:1px solid var(--line)}
+h2{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);
+  font-weight:700;margin-bottom:8px}
+.h2sub{color:var(--mute);font-size:14px;margin-bottom:26px}
+
+/* video */
+.video{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--ink2)}
+.video iframe,.video video{display:block;width:100%;aspect-ratio:9/16;border:0;background:#000}
+.videoempty{aspect-ratio:16/10;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;gap:10px;color:var(--mute);text-align:center;padding:26px}
+.play{width:52px;height:52px;border-radius:50%;border:1px solid var(--gold);
+  display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:17px}
+
+/* timeline */
+.tl{position:relative;padding-left:30px}
+.tl:before{content:"";position:absolute;left:8px;top:8px;bottom:8px;width:1px;background:var(--line)}
+.ev{position:relative;padding-bottom:28px}
+.ev:last-child{padding-bottom:0}
+.ev:before{content:"";position:absolute;left:-26px;top:7px;width:11px;height:11px;
+  border-radius:50%;background:var(--ink);border:2px solid var(--gold)}
+.ev h3{font-size:16px;font-weight:700}
+.evmeta{display:flex;flex-wrap:wrap;gap:7px;margin:9px 0 10px}
+.chip{font-size:11px;letter-spacing:.05em;border:1px solid var(--line);border-radius:999px;
+  padding:4px 10px;color:#b8b2a8;background:var(--ink2)}
+.chip b{color:var(--cream);font-weight:600}
+.ev p{color:#a8a29a;font-size:14.5px}
+
+/* qc table */
+.qc{border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.qcrow{display:flex;gap:12px;align-items:flex-start;padding:14px 16px;background:var(--ink2);
+  border-bottom:1px solid var(--line)}
+.qcrow:last-child{border-bottom:0}
+.tick{color:var(--ok);font-weight:700;flex:0 0 auto;font-size:15px;line-height:1.5}
+.qcrow div b{display:block;font-size:14.5px}
+.qcrow div span{color:var(--mute);font-size:13.5px}
+
+/* verify box */
+.verify{background:linear-gradient(160deg,#1a170f,#121214);border:1px solid #3a3324;
+  border-radius:14px;padding:24px}
+.verify ol{margin:16px 0 0 18px;color:#bdb7ad;font-size:14.5px}
+.verify li{margin-bottom:11px}
+.verify li b{color:var(--cream)}
+
+/* cta */
+.cta{text-align:center;padding:44px 0}
+.btn{display:block;background:var(--gold);color:#17140b;font-weight:700;
+  padding:15px 22px;border-radius:11px;text-decoration:none;letter-spacing:.03em;
+  margin-top:12px;font-size:15px}
+.btn.ghost{background:transparent;color:var(--cream);border:1px solid var(--line)}
+footer{color:#6e6a63;font-size:12px;text-align:center;padding:26px 0 40px;line-height:1.8}
+
+@media(max-width:520px){
+  h1{font-size:25px}
+  .specs{grid-template-columns:1fr}
+}
+
+.row{display:block;background:var(--ink2);border:1px solid var(--line);border-radius:12px;
+padding:16px;margin-bottom:10px;text-decoration:none;color:var(--cream)}
+.row b{font-family:ui-monospace,Menlo,monospace;letter-spacing:.08em;color:var(--gold-soft)}
+.row span{display:block;color:var(--mute);font-size:13.5px;margin-top:5px}
+.nf{padding:60px 0;text-align:center}
+</style>
+</head>
+<body>
+<div class="view" id="v-INDEX">
+<header><div class="wrap brandrow">
+<div class="brand">NAVA HAIR<small>Raw Vietnamese Hair Factory</small></div>
+<span class="verified"><span class="dot"></span>TRACEABILITY</span>
+</div></header>
+<div class="wrap"><section style="border:0">
+<h2>Batch index</h2><p class="h2sub">Every lot we have released, with its full production record.</p>
+<a class="row" href="#NV-18-250812"><b>NV-18-250812</b><span>18" Raw Vietnamese Straight &middot; 100g &middot; 128 bundles &middot; released 2025-08-19</span></a><a class="row" href="#NV-22-250805"><b>NV-22-250805</b><span>22" Raw Vietnamese Wavy &middot; 100g &middot; 94 bundles &middot; released 2025-08-13</span></a>
+</section></div></div><div class="view" id="v-NV-18-250812" hidden>
+
+<header><div class="wrap brandrow">
+  <div class="brand">NAVA HAIR<small>Raw Vietnamese Hair Factory</small></div>
+  <span class="verified"><span class="dot"></span>VERIFIED BATCH</span>
+</div></header>
+
+<div class="wrap">
+
+  <div class="hero">
+    <div class="kicker">Production record</div>
+    <h1>18" Raw Vietnamese Straight<br>&mdash; 100g bundle</h1>
+    <div class="batchid">BATCH NV-18-250812</div>
+    <p class="lede">This is not a marketing page. Every line below was recorded on the
+    factory floor as this specific lot was made &mdash; the day it arrived, every step,
+    the person who did it, and how long it took. 128 bundles
+    came out of this lot. Yours is one of them.</p>
+
+    <dl class="specs"><div class="spec"><dt>Length</dt><dd>18&quot;</dd></div><div class="spec"><dt>Texture</dt><dd>Raw Vietnamese Straight</dd></div><div class="spec"><dt>Bundle weight</dt><dd>100g</dd></div><div class="spec"><dt>Color</dt><dd>Natural #1B</dd></div><div class="spec"><dt>Origin</dt><dd>Nghe An, Vietnam</dd></div><div class="spec"><dt>Grade</dt><dd>Single Donor / Full Cuticle Aligned</dd></div><div class="spec"><dt>Raw intake</dt><dd>2025-08-12</dd></div><div class="spec"><dt>Released</dt><dd>2025-08-19</dd></div></dl>
+  </div>
+
+  <section>
+    <h2>Watch it being made</h2>
+    <p class="h2sub">Same lot. Same hands. Nothing staged.</p>
+    <div class="video"><div class="videoempty"><div class="play">&#9658;</div><div><b>Production film for this exact lot</b><br><span style="font-size:13px">Filmed on the factory floor &mdash; intake, wash, hackling, weft and QC, start to finish.</span></div></div></div>
+  </section>
+
+  <section>
+    <h2>Origin</h2>
+    <p class="h2sub">Where this hair came from, before we touched it.</p>
+    <div class="qc">
+      <div class="qcrow"><span class="tick">&#9679;</span><div><b>Nghe An, Vietnam</b><span>Collection region</span></div></div>
+      <div class="qcrow"><span class="tick">&#9679;</span><div><b>Single donor, cut directly from one head</b><span>Donor structure &mdash; not mixed, not floor-collected</span></div></div>
+      <div class="qcrow"><span class="tick">&#9679;</span><div><b>2025-08-12</b><span>Date the raw ponytail entered our factory</span></div></div>
+      <div class="qcrow"><span class="tick">&#9679;</span><div><b>41.5 working hours</b><span>Total labour from raw ponytail to finished bundle</span></div></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Every step, in order</h2>
+    <p class="h2sub">Who did it &middot; what day &middot; how long it took.</p>
+    <div class="tl">
+      <div class="ev">
+        <h3>01 &nbsp;Raw Intake &amp; Donor Verification</h3>
+        <div class="evmeta">
+          <span class="chip">Done by <b>Ms. Hoa</b></span>
+          <span class="chip">Sourcing Lead</span>
+          <span class="chip">2025-08-12</span>
+          <span class="chip">Took <b>2h 00m</b></span>
+        </div>
+        <p>Hair collected directly from a single donor in Nghe An. Length measured at 19&quot; raw to allow for shrinkage. Cuticle direction confirmed and the ponytail is tied at the root end before it ever leaves the village. No mixed-head hair enters this lot.</p>
+      </div>
+      <div class="ev">
+        <h3>02 &nbsp;Sorting &amp; Length Grading</h3>
+        <div class="evmeta">
+          <span class="chip">Done by <b>Ms. Lan</b></span>
+          <span class="chip">Sorting</span>
+          <span class="chip">2025-08-12</span>
+          <span class="chip">Took <b>3h 30m</b></span>
+        </div>
+        <p>Ponytail is separated by true length. Short strands and any strand with reversed cuticle direction are pulled out by hand. This lot graded to a true 18&quot; with less than 5% shorter fill.</p>
+      </div>
+      <div class="ev">
+        <h3>03 &nbsp;Deep Wash &amp; Clarify</h3>
+        <div class="evmeta">
+          <span class="chip">Done by <b>Ms. Thu</b></span>
+          <span class="chip">Wet Processing</span>
+          <span class="chip">2025-08-13</span>
+          <span class="chip">Took <b>4h 00m</b></span>
+        </div>
+        <p>Three-basin wash with a sulfate-free clarifier at controlled temperature. Removes field dust and oils without stripping the cuticle. No silicone coating is used at any stage.</p>
+      </div>
+      <div class="ev">
+        <h3>04 &nbsp;Conditioning &amp; Air Dry</h3>
+        <div class="evmeta">
+          <span class="chip">Done by <b>Ms. Thu</b></span>
+          <span class="chip">Wet Processing</span>
+          <span class="chip">2025-08-13</span>
+          <span class="chip">Took <b>8h 00m</b></span>
+        </div>
+        <p>Protein-balanced conditioning treatment, rinsed cool, then hung to air dry in a shaded ventilated room. No heat dryers - heat drying is what leaves hair looking good for two weeks and then dead.</p>
+      </div>
+      <div class="ev">
+        <h3>05 &nbsp;Hackling / Cuticle Alignment</h3>
+        <div class="evmeta">
+          <span class="chip">Done by <b>Mr. Tuan</b></span>
+          <span class="chip">Hackling</span>
+          <span class="chip">2025-08-14</span>
+          <span class="chip">Took <b>5h 00m</b></span>
+        </div>
+        <p>Hair drawn through steel hackle boards to align every strand root-to-tip in the same direction. This is the step that decides whether the bundle tangles at month three.</p>
+      </div>
+      <div class="ev">
+        <h3>06 &nbsp;Weft Sewing (Double Drawn Weft)</h3>
+        <div class="evmeta">
+          <span class="chip">Done by <b>Ms. Nga</b></span>
+          <span class="chip">Weft Line</span>
+          <span class="chip">2025-08-15</span>
+          <span class="chip">Took <b>9h 00m</b></span>
+        </div>
+        <p>Machine double weft, sewn flat and thin. Weft tested by hand-pull before it goes on. Weight measured wet-free at 100g +/- 2g per bundle.</p>
+      </div>
+      <div class="ev">
+        <h3>07 &nbsp;Quality Control - Bleach &amp; Water Test</h3>
+        <div class="evmeta">
+          <span class="chip">Done by <b>Mr. Khanh</b></span>
+          <span class="chip">QC</span>
+          <span class="chip">2025-08-18</span>
+          <span class="chip">Took <b>6h 00m</b></span>
+        </div>
+        <p>Sample strands pulled from this lot and lifted to level 10 to prove the hair takes color without melting. Water test run for tangle and shed. Results recorded against this batch ID.</p>
+      </div>
+      <div class="ev">
+        <h3>08 &nbsp;Final Inspection, Tagging &amp; Packing</h3>
+        <div class="evmeta">
+          <span class="chip">Done by <b>Ms. Mai</b></span>
+          <span class="chip">Packing</span>
+          <span class="chip">2025-08-19</span>
+          <span class="chip">Took <b>4h 00m</b></span>
+        </div>
+        <p>Each bundle weighed individually, tied, QR tag attached, and sealed. The tag you just scanned was printed against this record.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Quality control on this lot</h2>
+    <p class="h2sub">Tests run on sample strands pulled from this exact batch.</p>
+    <div class="qc"><div class="qcrow"><span class="tick">&#10003;</span><div><b>Bleach lift test</b><span>Reached level 10, no melting, no gum</span></div></div><div class="qcrow"><span class="tick">&#10003;</span><div><b>Water tangle test</b><span>No tangle after 3 full wet cycles</span></div></div><div class="qcrow"><span class="tick">&#10003;</span><div><b>Shedding test</b><span>Under 5 strands per 20 brush strokes</span></div></div><div class="qcrow"><span class="tick">&#10003;</span><div><b>Cuticle direction (burn + finger test)</b><span>Uniform root-to-tip, smooth downward</span></div></div><div class="qcrow"><span class="tick">&#10003;</span><div><b>Weight verification</b><span>100g +/- 2g dry weight per bundle</span></div></div><div class="qcrow"><span class="tick">&#10003;</span><div><b>Steam / silicone coating check</b><span>None detected - raw, uncoated</span></div></div></div>
+  </section>
+
+  <section>
+    <div class="verify">
+      <h2 style="margin-bottom:6px">Don't take our word for it</h2>
+      <p style="color:#bdb7ad;font-size:14.5px">A record is only worth something if you can
+      check it. Run these on the bundle in your hand and see whether it matches what we
+      claimed above.</p>
+      <ol>
+        <li><b>Bleach test.</b> Take 10 strands, lift them. Raw hair goes light and stays
+        elastic. Processed hair turns to gum.</li>
+        <li><b>Water test.</b> Wet it, let it dry with no product. Raw hair dries clean.
+        Coated hair tangles the moment the silicone rinses off.</li>
+        <li><b>Cuticle test.</b> Run two fingers up the strand. It should feel rough one
+        way and smooth the other. Smooth both ways means the cuticle was stripped.</li>
+        <li><b>Burn test.</b> Real hair smells like burnt keratin and turns to grey ash.
+        Synthetic melts into a hard bead and smells like plastic.</li>
+        <li><b>Weigh it.</b> 100g dry. If it weighs light, you were charged for air.</li>
+      </ol>
+      <p style="color:#8e887f;font-size:13.5px;margin-top:16px">If any test fails on this
+      batch ID, message us with the batch number. We will replace it.</p>
+    </div>
+  </section>
+
+  <div class="cta">
+    <div class="kicker">Wholesale enquiries</div>
+    <h2 style="color:var(--cream);font-size:20px;letter-spacing:0;text-transform:none;margin:10px 0 18px">
+      Want a lot traced like this one?</h2>
+    <a class="btn" href="https://wa.me/84XXXXXXXXX?text=Hi%20Nava%20-%20I%20scanned%20batch%20NV-18-250812%20and%20want%20wholesale%20pricing">Message us on WhatsApp</a>
+    <a class="btn ghost" href="https://instagram.com/nava.hair_factory.vietnam">@nava.hair_factory.vietnam</a>
+  </div>
+
+  <footer>
+    NAVA HAIR &mdash; Raw Vietnamese Hair Factory<br>
+    Batch NV-18-250812 &middot; record sealed 2025-08-19<br>
+    This page is generated from our production log. It is not editable after a lot ships.
+  </footer>
+
+</div>
+</div><div class="view" id="v-NV-22-250805" hidden>
+
+<header><div class="wrap brandrow">
+  <div class="brand">NAVA HAIR<small>Raw Vietnamese Hair Factory</small></div>
+  <span class="verified"><span class="dot"></span>VERIFIED BATCH</span>
+</div></header>
+
+<div class="wrap">
+
+  <div class="hero">
+    <div class="kicker">Production record</div>
+    <h1>22" Raw Vietnamese Wavy<br>&mdash; 100g bundle</h1>
+    <div class="batchid">BATCH NV-22-250805</div>
+    <p class="lede">This is not a marketing page. Every line below was recorded on the
+    factory floor as this specific lot was made &mdash; the day it arrived, every step,
+    the person who did it, and how long it took. 94 bundles
+    came out of this lot. Yours is one of them.</p>
+
+    <dl class="specs"><div class="spec"><dt>Length</dt><dd>22&quot;</dd></div><div class="spec"><dt>Texture</dt><dd>Raw Vietnamese Wavy</dd></div><div class="spec"><dt>Bundle weight</dt><dd>100g</dd></div><div class="spec"><dt>Color</dt><dd>Natural #1B</dd></div><div class="spec"><dt>Origin</dt><dd>Thanh Hoa, Vietnam</dd></div><div class="spec"><dt>Grade</dt><dd>Single Donor / Full Cuticle Aligned</dd></div><div class="spec"><dt>Raw intake</dt><dd>2025-08-05</dd></div><div class="spec"><dt>Released</dt><dd>2025-08-13</dd></div></dl>
+  </div>
+
+  <section>
+    <h2>Watch it being made</h2>
+    <p class="h2sub">Same lot. Same hands. Nothing staged.</p>
+    <div class="video"><div class="videoempty"><div class="play">&#9658;</div><div><b>Production film for this exact lot</b><br><span style="font-size:13px">Filmed on the factory floor &mdash; intake, wash, hackling, weft and QC, start to finish.</span></div></div></div>
+  </section>
+
+  <section>
+    <h2>Origin</h2>
+    <p class="h2sub">Where this hair came from, before we touched it.</p>
+    <div class="qc">
+      <div class="qcrow"><span class="tick">&#9679;</span><div><b>Thanh Hoa, Vietnam</b><span>Collection region</span></div></div>
+      <div class="qcrow"><span class="tick">&#9679;</span><div><b>Single donor, cut directly from one head</b><span>Donor structure &mdash; not mixed, not floor-collected</span></div></div>
+      <div class="qcrow"><span class="tick">&#9679;</span><div><b>2025-08-05</b><span>Date the raw ponytail entered our factory</span></div></div>
+      <div class="qcrow"><span class="tick">&#9679;</span><div><b>46.0 working hours</b><span>Total labour from raw ponytail to finished bundle</span></div></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Every step, in order</h2>
+    <p class="h2sub">Who did it &middot; what day &middot; how long it took.</p>
+    <div class="tl">
+      <div class="ev">
+        <h3>01 &nbsp;Raw Intake &amp; Donor Verification</h3>
+        <div class="evmeta">
+          <span class="chip">Done by <b>Ms. Hoa</b></span>
+          <span class="chip">Sourcing Lead</span>
+          <span class="chip">2025-08-05</span>
+          <span class="chip">Took <b>2h 00m</b></span>
+        </div>
+        <p>Natural wave pattern confirmed at intake - no chemical or heat texturing. Measured at 23&quot; raw.</p>
+      </div>
+      <div class="ev">
+        <h3>02 &nbsp;Sorting &amp; Length Grading</h3>
+        <div class="evmeta">
+          <span class="chip">Done by <b>Ms. Lan</b></span>
+          <span class="chip">Sorting</span>
+          <span class="chip">2025-08-05</span>
+          <span class="chip">Took <b>4h 00m</b></span>
+        </div>
+        <p>Longer lengths take longer to sort. Graded to a true 22&quot;.</p>
+      </div>
+      <div class="ev">
+        <h3>03 &nbsp;Deep Wash &amp; Clarify</h3>
+        <div class="evmeta">
+          <span class="chip">Done by <b>Ms. Thu</b></span>
+          <span class="chip">Wet Processing</span>
+          <span class="chip">2025-08-06</span>
+          <span class="chip">Took <b>4h 30m</b></span>
+        </div>
+        <p>Same three-basin protocol, gentler agitation to protect the natural wave.</p>
+      </div>
+      <div class="ev">
+        <h3>04 &nbsp;Conditioning &amp; Air Dry</h3>
+        <div class="evmeta">
+          <span class="chip">Done by <b>Ms. Thu</b></span>
+          <span class="chip">Wet Processing</span>
+          <span class="chip">2025-08-06</span>
+          <span class="chip">Took <b>10h 00m</b></span>
+        </div>
+        <p>Air dried in wave formation. No heat, no brushing while wet.</p>
+      </div>
+      <div class="ev">
+        <h3>05 &nbsp;Hackling / Cuticle Alignment</h3>
+        <div class="evmeta">
+          <span class="chip">Done by <b>Mr. Tuan</b></span>
+          <span class="chip">Hackling</span>
+          <span class="chip">2025-08-08</span>
+          <span class="chip">Took <b>6h 00m</b></span>
+        </div>
+        <p>Aligned by hand-drawn hackle with reduced tension to keep the wave intact.</p>
+      </div>
+      <div class="ev">
+        <h3>06 &nbsp;Weft Sewing (Double Drawn Weft)</h3>
+        <div class="evmeta">
+          <span class="chip">Done by <b>Ms. Nga</b></span>
+          <span class="chip">Weft Line</span>
+          <span class="chip">2025-08-11</span>
+          <span class="chip">Took <b>10h 30m</b></span>
+        </div>
+        <p>Machine double weft, flat and thin. 100g +/- 2g per bundle.</p>
+      </div>
+      <div class="ev">
+        <h3>07 &nbsp;Quality Control - Bleach &amp; Water Test</h3>
+        <div class="evmeta">
+          <span class="chip">Done by <b>Mr. Khanh</b></span>
+          <span class="chip">QC</span>
+          <span class="chip">2025-08-12</span>
+          <span class="chip">Took <b>5h 00m</b></span>
+        </div>
+        <p>Lift test to level 9 on wavy texture. Wave pattern held after wash.</p>
+      </div>
+      <div class="ev">
+        <h3>08 &nbsp;Final Inspection, Tagging &amp; Packing</h3>
+        <div class="evmeta">
+          <span class="chip">Done by <b>Ms. Mai</b></span>
+          <span class="chip">Packing</span>
+          <span class="chip">2025-08-13</span>
+          <span class="chip">Took <b>4h 00m</b></span>
+        </div>
+        <p>Weighed, tagged with this QR, sealed.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Quality control on this lot</h2>
+    <p class="h2sub">Tests run on sample strands pulled from this exact batch.</p>
+    <div class="qc"><div class="qcrow"><span class="tick">&#10003;</span><div><b>Bleach lift test</b><span>Reached level 9, structure intact</span></div></div><div class="qcrow"><span class="tick">&#10003;</span><div><b>Water tangle test</b><span>No tangle, wave pattern returns after drying</span></div></div><div class="qcrow"><span class="tick">&#10003;</span><div><b>Shedding test</b><span>Under 5 strands per 20 brush strokes</span></div></div><div class="qcrow"><span class="tick">&#10003;</span><div><b>Cuticle direction (burn + finger test)</b><span>Uniform root-to-tip</span></div></div><div class="qcrow"><span class="tick">&#10003;</span><div><b>Weight verification</b><span>100g +/- 2g dry weight per bundle</span></div></div><div class="qcrow"><span class="tick">&#10003;</span><div><b>Steam / silicone coating check</b><span>None detected - raw, uncoated</span></div></div></div>
+  </section>
+
+  <section>
+    <div class="verify">
+      <h2 style="margin-bottom:6px">Don't take our word for it</h2>
+      <p style="color:#bdb7ad;font-size:14.5px">A record is only worth something if you can
+      check it. Run these on the bundle in your hand and see whether it matches what we
+      claimed above.</p>
+      <ol>
+        <li><b>Bleach test.</b> Take 10 strands, lift them. Raw hair goes light and stays
+        elastic. Processed hair turns to gum.</li>
+        <li><b>Water test.</b> Wet it, let it dry with no product. Raw hair dries clean.
+        Coated hair tangles the moment the silicone rinses off.</li>
+        <li><b>Cuticle test.</b> Run two fingers up the strand. It should feel rough one
+        way and smooth the other. Smooth both ways means the cuticle was stripped.</li>
+        <li><b>Burn test.</b> Real hair smells like burnt keratin and turns to grey ash.
+        Synthetic melts into a hard bead and smells like plastic.</li>
+        <li><b>Weigh it.</b> 100g dry. If it weighs light, you were charged for air.</li>
+      </ol>
+      <p style="color:#8e887f;font-size:13.5px;margin-top:16px">If any test fails on this
+      batch ID, message us with the batch number. We will replace it.</p>
+    </div>
+  </section>
+
+  <div class="cta">
+    <div class="kicker">Wholesale enquiries</div>
+    <h2 style="color:var(--cream);font-size:20px;letter-spacing:0;text-transform:none;margin:10px 0 18px">
+      Want a lot traced like this one?</h2>
+    <a class="btn" href="https://wa.me/84XXXXXXXXX?text=Hi%20Nava%20-%20I%20scanned%20batch%20NV-22-250805%20and%20want%20wholesale%20pricing">Message us on WhatsApp</a>
+    <a class="btn ghost" href="https://instagram.com/nava.hair_factory.vietnam">@nava.hair_factory.vietnam</a>
+  </div>
+
+  <footer>
+    NAVA HAIR &mdash; Raw Vietnamese Hair Factory<br>
+    Batch NV-22-250805 &middot; record sealed 2025-08-13<br>
+    This page is generated from our production log. It is not editable after a lot ships.
+  </footer>
+
+</div>
+</div>
+<div class="view" id="v-404" hidden>
+  <header><div class="wrap brandrow">
+    <div class="brand">NAVA HAIR<small>Raw Vietnamese Hair Factory</small></div>
+  </div></header>
+  <div class="wrap nf">
+    <h1 style="font-size:22px">Batch not found</h1>
+    <p style="color:var(--mute);margin-top:12px">We have no record under that code.
+    Check the tag again, or message us with the number printed on it.</p>
+    <p style="margin-top:20px"><a href="#">See all batches</a></p>
+  </div>
+</div>
+<script>
+var IDS = ["NV-18-250812", "NV-22-250805"];
+function show(){
+  var h = (location.hash || '').replace(/^#\/?/, '').trim().toUpperCase();
+  var target = !h ? 'INDEX' : (IDS.indexOf(h) >= 0 ? h : '404');
+  document.querySelectorAll('.view').forEach(function(v){
+    v.hidden = (v.id !== 'v-' + target);
+  });
+  window.scrollTo(0,0);
+}
+window.addEventListener('hashchange', show);
+show();
+</script>
+</body></html>
