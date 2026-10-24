@@ -1,0 +1,46 @@
+{
+  "cooldown_days": 60,
+  "heygen": {
+    "avatar_name": "San",
+    "voice_name": "San Nguyễn Van",
+    "width": 1080,
+    "height": 1920,
+    "voice_speed": 1.0
+  },
+  "drive": {
+    "kho_root": "1MmVVZge7z2UoiyaucBv2e157V6ptIjgX",
+    "kho_dung_duoc": "1djkvSSWxpdsHKkDfT6iRqiVtsnA5zG-A",
+    "dang_khoa": "1fQrTY3Cto6WhmZ1QnOyK0Zn3pKh6YxAE",
+    "thanh_pham": "1TvtgMfGuy0ITgpkfuXdZteg2atlhbRBZ",
+    "ledger_sheet": "1lRdrvmpYfgs9Y4ZkRXAExpZa7N0OEGiQYh0WCEWWKeo",
+    "nhac_nen": {
+      "A": "1YhT2r2qE5699APN992PhsZuoPwGHe2st",
+      "B": "1vsQXXLLHQnmkcGSvtymyk4xleGIBXPLk",
+      "C": "1NeSuGEJ3CZGKBxByG-IflBvfb5F35enK",
+      "D": "1vi8UugTjUKMlvh1Zw3E60V7CEIQO3f3Y"
+    }
+  },
+  "stages": {
+    "00": {"id": "169fsuEqZw0UjOGn5PkCqU8gEeH2lViKB", "name": "INBOX — chưa rõ công đoạn"},
+    "01": {"id": "101NGROGEf00-TqSaQ-1iGwzUG4V2pYrM", "name": "Thu mua & nhập tóc thô"},
+    "02": {"id": "1bGkgO8eDOLdqOoHtEGVia8PMyEI6wUXO", "name": "Cạo kiểm one-donor & test tẩy"},
+    "03": {"id": "1xr-T6RIV0CA3FY_G6RJ__AOrei5trA09", "name": "Phân loại & chia độ dài"},
+    "04": {"id": "1vrqI0AYExQLSPCVcKRwq4Dv2bVN8mNv5", "name": "Giặt & sấy"},
+    "05": {"id": "1_H2h26d4zw0knmTsbjUIIoaA3n2T4Pux", "name": "Đảo rút & gõ đầu"},
+    "06": {"id": "1w4-ALtcdYIog2PApvMfpqS8Zd3PUPfl0", "name": "Cào răm"},
+    "07": {"id": "1kIlXOBPK6mGGq6ZIg-tJiNKs4wnjEbaa", "name": "Kiểm tra sau gõ đầu"},
+    "08": {"id": "1LjzgcupmmO0rKZ5kB6TPquZ0kL2m77BD", "name": "Tẩy & nâng nền 613"},
+    "09": {"id": "1gczacRPC7PcgbGQ7F7qG9za7Vj7xtTBe", "name": "Nhuộm & lên màu"},
+    "10": {"id": "1s79aa0H_nTcPw6NfhbJ7CpXFX8z_EeGE", "name": "Hấp tạo sóng & xoăn"},
+    "11": {"id": "1fjPgoILXvYO_h-KTvqBx6TTQXy82ySbe", "name": "May weft"},
+    "12": {"id": "1jYHmh675DAur4c08wr1ll9McKh2QCAFc", "name": "QC bó (đo, cân, kiểm rụng)"},
+    "13": {"id": "1WYNnv1M7dAiJac0_vK_pfVH4ZHmq9WSt", "name": "Móc lace & knots"},
+    "14": {"id": "1kkEjjiKe8anOl8RrY9XrAyUjFXHT_AoK", "name": "May wig"},
+    "15": {"id": "1sPSqG0yPRd_GorF3uRr75dXw2Fk7a8gv", "name": "Cắt & tạo kiểu"},
+    "16": {"id": "1ac6Iz9tCdVb3--eIR_v7J57lY1yLwTf-", "name": "Thành phẩm & chụp sản phẩm"},
+    "17": {"id": "11L-1kVrDcfu5Dhh2Ghm-7I4HUCknyDpK", "name": "Đóng gói & xuất hàng"},
+    "18": {"id": "1c6kY0tII4gYKJrU-9D-YW-tyzQT8Fy4P", "name": "Khách & feedback"},
+    "19": {"id": "1QP7Oi0Dd8FpuI6xmFit0LkwNhbkzVM33", "name": "Không khí xưởng & cảnh nối"}
+  },
+  "fallback_stages": ["19", "16"]
+}

@@ -1,0 +1,55 @@
+{
+  "id": "NH-20261025-HG1",
+  "title": "3 tests before you pay any hair vendor",
+  "on_screen_hook": "3 TESTS BEFORE YOU PAY ANY HAIR VENDOR",
+  "music_mood": "D",
+  "trend_sources": "Trustpilot 2026 complaints (synthetic blends, thin wefts, refund fights); 'raw vs virgin' definition confusion across supplier blogs; paid 'verified vendor list' products sold to beginners.",
+  "segments": [
+    {
+      "text": "I've spent years inside Vietnamese hair factories. Before you pay any vendor, including me, run these three tests on the sample.",
+      "vi": "Tôi đã làm nhiều năm trong các nhà máy tóc Việt Nam. Trước khi trả tiền cho bất kỳ nhà cung cấp nào, kể cả tôi, hãy làm 3 bài test này với mẫu.",
+      "emphasis": ["three", "tests"]
+    },
+    {
+      "text": "Test one: the burn test. Real human hair turns to ash and smells like burnt hair. If it melts into a hard little bead, there's synthetic in the blend.",
+      "vi": "Test 1: đốt thử. Tóc người thật cháy thành tro, có mùi tóc khét. Nếu chảy thành hạt cứng, có lẫn sợi tổng hợp.",
+      "broll": {"stage": "12", "alt": ["02", "07"], "hint": "tay cầm vài sợi tóc, cận cảnh kiểm sợi"},
+      "emphasis": ["ash", "bead", "synthetic"]
+    },
+    {
+      "text": "Test two: wash it with a clarifying shampoo. No conditioner.",
+      "vi": "Test 2: gội bằng dầu gội làm sạch sâu. Không dùng dầu xả.",
+      "emphasis": ["clarifying"]
+    },
+    {
+      "text": "Heavy silicone makes damaged hair feel silky in the package. Strip it off, and if the hair turns dry and tangly, that softness was fake.",
+      "vi": "Silicone dày làm tóc hư sờ vẫn mượt trong bao bì. Gội trôi lớp đó đi, nếu tóc khô và rối thì độ mượt đó là giả.",
+      "broll": {"stage": "04", "alt": ["06"], "hint": "giặt, xả nước, tóc ướt"},
+      "emphasis": ["silicone", "fake"]
+    },
+    {
+      "text": "Test three, the one most people skip: bleach a small strand.",
+      "vi": "Test 3, bài mà đa số bỏ qua: tẩy thử một lọn nhỏ.",
+      "emphasis": ["bleach"]
+    },
+    {
+      "text": "Truly unprocessed hair lifts evenly toward blonde. Hair that was already chemically treated goes patchy, brassy, or gummy.",
+      "vi": "Tóc chưa qua xử lý thật sự sẽ nâng màu đều lên vàng sáng. Tóc đã qua hoá chất sẽ loang, ngả cam, hoặc bị nhão.",
+      "broll": {"stage": "08", "alt": ["02", "09"], "hint": "bôi thuốc tẩy, tóc lên 613"},
+      "emphasis": ["evenly", "gummy"]
+    },
+    {
+      "text": "A real factory is happy to send a sample for this. A vendor who refuses is telling you something.",
+      "vi": "Một nhà máy thật luôn sẵn lòng gửi mẫu để test. Nhà cung cấp nào từ chối là đang nói cho bạn biết điều gì đó.",
+      "broll": {"stage": "06", "alt": ["11", "19"], "hint": "cảnh xưởng, cào răm hoặc may weft"},
+      "emphasis": ["sample", "refuses"]
+    },
+    {
+      "text": "Save this before your next bulk order, and follow for more from inside the factory.",
+      "vi": "Lưu video này trước đơn sỉ tiếp theo, và theo dõi để xem thêm từ bên trong nhà máy.",
+      "emphasis": ["save"]
+    }
+  ],
+  "caption": "Before you wire money for a bulk hair order, test the sample. 🔥 Burn test: ash = human hair, a hard bead = synthetic in the blend. 🧴 Clarifying wash: silicone can hide damage; if it turns dry and tangly after one wash, the softness was fake. 🧪 Bleach a small strand: truly unprocessed hair lifts evenly; pre-processed hair goes patchy, brassy or gummy. Any serious factory will send a sample. Save this for your next order. Which test have you never tried? 👇",
+  "hashtags": "#rawhair #vietnamesehair #hairvendor #wholesalehair #hairbusiness #hairextensions #bundles #salonowner #hairtips #613hair #wigvendor #hairfactory"
+}
